@@ -29,6 +29,15 @@ namespace FirstApp24.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Privacy(string name, int age)
+        {
+            ViewData["name"] = name;
+            ViewData["age"] = age;
+            
+            return View();
+        }
+
         public IActionResult Contacts()
         {
 

@@ -1,3 +1,6 @@
+using FirstApp24.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace FirstApp24
 {
     public class Program
@@ -8,7 +11,9 @@ namespace FirstApp24
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            
+
+            builder.Services.AddDbContext<ProductsDB>(options =>
+                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=products24;Trusted_Connection=True;"));
 
             var app = builder.Build();
 

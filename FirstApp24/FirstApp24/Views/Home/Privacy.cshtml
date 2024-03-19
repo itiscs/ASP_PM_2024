@@ -3,4 +3,32 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>Hello, @ViewData["name"]   Age  - @ViewData["age"]</p>
+
+<form method="post">
+    <table>
+    <tr>
+        <td>
+            Имя
+        </td>
+        <td>
+            <input type="text" name="name" placeholder="введите имя" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Возраст
+        </td>
+        <td>
+            <input type="number" name="age" placeholder="введите возраст" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Отправить" />
+        </td>
+    </tr>
+</table>
+
+</form>
+
