@@ -13,7 +13,7 @@ namespace FirstApp24
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<ProductsDB>(options =>
-                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=products24;Trusted_Connection=True;"));
+                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=prod2024;Trusted_Connection=True;"));
 
             var app = builder.Build();
 

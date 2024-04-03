@@ -53,7 +53,7 @@ namespace FirstApp24.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Count")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Count")] Product product)
         {
             if (ModelState.IsValid)
             {
