@@ -13,15 +13,17 @@ namespace IdentityApp
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-        
-            
+
+            builder.Services.AddDistributedMemoryCache();// добавляем IDistributedMemoryCache
+            builder.Services.AddSession();  // добавляем сервисы сессии
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             //builder.Services.AddIdentity<AppUser,IdentityRole>();
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true
               )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -43,7 +45,10 @@ namespace IdentityApp
 
             app.UseRouting();
 
+            
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

@@ -14,11 +14,13 @@ namespace IdentityApp.Controllers
 
         private readonly ApplicationDbContext _db;
 
-        UserManager<IdentityUser> _userManager;
+        UserManager<AppUser> _userManager;
+
+       
 
         public HomeController(ILogger<HomeController> logger,
             ApplicationDbContext db,
-            UserManager<IdentityUser> userManager)
+            UserManager<AppUser> userManager)
         {
             _logger = logger;
             _db = db;
@@ -27,6 +29,32 @@ namespace IdentityApp.Controllers
 
         public IActionResult Index()
         {
+            if (Request.Query.Keys.Contains("mytheme"))
+            {
+                var t = Request.Query["mytheme"].ToString();
+                @ViewData["theme"] = t;
+                Response.Cookies.Append("theme", t);
+            }
+
+            if (Request.Cookies.Keys.Contains("theme"))
+            {
+                var t = Request.Cookies["theme"]?.ToString();
+                @ViewData["theme2"] = t;
+            }
+
+            if (Request.Query.Keys.Contains("role"))
+            {
+                var t = Request.Query["role"].ToString();
+                @ViewData["role"] = t;
+                HttpContext.Session.SetString("role", t);
+            }
+
+            if (HttpContext.Session.Keys.Contains("role"))
+            {
+                var t = HttpContext.Session.GetString("role");
+                @ViewData["role2"] = t;
+            }
+
             return View();
         }
 

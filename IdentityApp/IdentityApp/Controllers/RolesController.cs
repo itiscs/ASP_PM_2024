@@ -1,4 +1,5 @@
-﻿using IdentityApp.ViewModels;
+﻿using IdentityApp.Models;
+using IdentityApp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,9 @@ namespace IdentityApp.Controllers
     
     { 
         RoleManager<IdentityRole> _roleManager;
-        UserManager<IdentityUser> _userManager;
+        UserManager<AppUser> _userManager;
         public RolesController(RoleManager<IdentityRole> roleManager,
-            UserManager<IdentityUser> userManager)
+            UserManager<AppUser> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -57,7 +58,7 @@ namespace IdentityApp.Controllers
         {
             
             // получаем пользователя
-            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            AppUser user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
                 // получем список ролей пользователя
@@ -79,7 +80,7 @@ namespace IdentityApp.Controllers
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {
             // получаем пользователя
-            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            AppUser user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
                 // получем список ролей пользователя
