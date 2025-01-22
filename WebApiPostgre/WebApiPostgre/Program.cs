@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebApiPostgre;
+using WebApiPostgre.Data;
 using WebApiPostgre.Models;
+using WebApiPostgre.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +34,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 });
 
 // Add services to the container.
-builder.Services.AddDbContext<ProductsContext>();
+builder.Services.AddDbContext<ProductsContext>(option=>
+   option.UseNpgsql(builder.Configuration.GetConnectionString("default")) 
+   );
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddControllers();
 

@@ -1,17 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace WebApiPostgre.Models
 {
     public class ProductsContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
-        public ProductsContext()
+        public ProductsContext(DbContextOptions<ProductsContext> options): base(options)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
             //Database.EnsureCreated();
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5433;Database=productsdb;Username=postgres;Password=1");
-        }
+
     }
 }
