@@ -38,6 +38,8 @@ builder.Services.AddDbContext<ProductsContext>(option=>
    option.UseNpgsql(builder.Configuration.GetConnectionString("default")) 
    );
 
+builder.Services.AddCors();
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddControllers();
@@ -48,6 +50,10 @@ var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors(builder => builder.AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod());
 
 app.MapControllers();
 
