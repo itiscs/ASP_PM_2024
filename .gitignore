@@ -29,3 +29,6 @@
 /WebApiPostgre/TestProject/bin
 /WebApiPostgre/TestProject/obj
 /WebApiPostgre/WebApiPostgre/bin/Release/net8.0
+/FetchApiClient/.vs
+/FetchApiClient/FetchApiClient/bin/Debug/net8.0
+/FetchApiClient/FetchApiClient/obj
